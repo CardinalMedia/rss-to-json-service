@@ -43,6 +43,10 @@ app.use(function (req, res, next) {
 app.models = Models
 app.services = Services
 
+// Parse Routes
+
+app.get(apiPrefix + '/parse', Controllers.parser.find)
+
 // Status Routes
 
 app.get(apiPrefix + '/routes', (req, res) => {
@@ -53,17 +57,17 @@ app.get(apiPrefix + '/routes', (req, res) => {
 app.get(apiPrefix + '/status', Controllers.status.find)
 
 // User Routes
-app.post(apiPrefix + '/users', Controllers.user.create)
-app.get(apiPrefix + '/users', expressJwt({secret: JWT_SECRET, credentialsRequired: false}), Controllers.user.find)
-app.get(apiPrefix + '/users/:id', expressJwt({secret: JWT_SECRET}), Controllers.user.findById)
-app.put(apiPrefix + '/users', expressJwt({secret: JWT_SECRET}), Controllers.user.update)
-app.delete(apiPrefix + '/users', expressJwt({secret: JWT_SECRET}), Controllers.user.destroy)
+// app.post(apiPrefix + '/users', Controllers.user.create)
+// app.get(apiPrefix + '/users', expressJwt({secret: JWT_SECRET, credentialsRequired: false}), Controllers.user.find)
+// app.get(apiPrefix + '/users/:id', expressJwt({secret: JWT_SECRET}), Controllers.user.findById)
+// app.put(apiPrefix + '/users', expressJwt({secret: JWT_SECRET}), Controllers.user.update)
+// app.delete(apiPrefix + '/users', expressJwt({secret: JWT_SECRET}), Controllers.user.destroy)
 
 // Auth Routes
-app.post(apiPrefix + '/auth', Controllers.auth.login)
-app.post(apiPrefix + '/auth/password/reset/start', Controllers.auth.startPasswordReset)
-app.get('/password/reset/:token', Controllers.auth.renderForm)
-app.post(apiPrefix + '/auth/password/reset/', Controllers.auth.savePasswordReset)
+// app.post(apiPrefix + '/auth', Controllers.auth.login)
+// app.post(apiPrefix + '/auth/password/reset/start', Controllers.auth.startPasswordReset)
+// app.get('/password/reset/:token', Controllers.auth.renderForm)
+// app.post(apiPrefix + '/auth/password/reset/', Controllers.auth.savePasswordReset)
 
 app.get('/', (req, res) => {
   res.status(200).json({
